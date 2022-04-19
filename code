@@ -1,0 +1,39 @@
+//Sheep_Count
+
+int counter = 0;
+int PIR_Meadow = 3, PIR_Gate = 4, PIR_Paddock = 5;
+int led = 12;
+
+
+
+void setup()
+{
+  pinMode(led, OUTPUT);
+  pinMode(PIR_Meadow, INPUT);
+  pinMode(PIR_Gate, INPUT);
+  pinMode(PIR_Paddock, INPUT);
+  Serial.begin(9600);// Amount of bits/sec 
+}
+
+
+
+void loop()
+{
+  if((digitalRead(PIR_Gate)== 1)&&(digitalRead(PIR_Paddock) == 1))
+  {	counter += 1;
+  	digitalWrite(led,HIGH);
+   	delay(1000);
+   	digitalWrite(led,LOW);
+   	Serial.println("Number of Sheep inside paddock = ", counter);
+  }
+  else if((digitalRead(PIR_Gate) == 1)&&(digitalRead(PIR_Meadow) == 1))
+  {
+  	counter -= 1;
+    digitalWrite(led,HIGH);
+   	delay(1000);
+   	digitalWrite(led,LOW);
+   	Serial.println("Number of Sheep inside paddock = ", counter);
+  }
+  
+  
+}
